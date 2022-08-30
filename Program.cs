@@ -46,11 +46,12 @@ namespace best_poker_hand
             {
                 return "Pair";
             }
-            
+
             if (ranks.Contains(1))
             {
                 return 1.ToString();
             }
+            //cuz 1 is highest num
             return ranks.Max().ToString();
 
 
