@@ -16,8 +16,8 @@ namespace best_poker_hand
         }
         public static string BestHand(int[] ranks, char[] suits)
         {
-            var sameSuit = 0;
-            var sameRank = 0;
+            var sameSuit = 1;
+            var sameRank = 1;
 
             for (int i = 0; i < suits.Length - 1; i++)
             {
@@ -26,7 +26,7 @@ namespace best_poker_hand
                     sameSuit++;
                 }
             }
-            if (sameSuit == 4)
+            if (sameSuit == 5)
             {
                 return "Flush";
             }
@@ -38,14 +38,15 @@ namespace best_poker_hand
                     sameRank++;
                 }
             }
-            if (sameRank >=2)
+            if (sameRank >=3)
             {
                 return "Three of a Kind";
             }
-            if (sameRank == 1)
+            if (sameRank == 2)
             {
                 return "Pair";
             }
+            
             if (ranks.Contains(1))
             {
                 return 1.ToString();
