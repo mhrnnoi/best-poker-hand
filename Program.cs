@@ -9,7 +9,7 @@ namespace best_poker_hand
             Console.WriteLine("WELCOME ");
 
 
-            var rnks = new int[] { 4, 3, 8, 9, 3 };
+            var rnks = new int[] { 4, 3, 3, 4, 4 };
             var suits = new char[] { '♠', '♠', '♠', 'a', '♠' };
             Console.WriteLine(BestHand(rnks, suits));
 
@@ -32,33 +32,36 @@ namespace best_poker_hand
 
             for (int i = 0; i < suits.Length - 1; i++)
             {
+                sameRank = 1;
                 for (int j = i; j < suits.Length - 1; j++)
                 {
                     if (ranks[i] == ranks[j + 1])
-                    sameRank++;
+                        sameRank++;
+                }
+                switch (sameRank)
+                {
+                    case 3:
+                        return "Three of a Kind";
+
+                    case 2:
+                        return "Pair";
+
+
+
+
                 }
 
             }
 
-            switch (sameRank)
-            {
-                case 3:
-                    return "Three of a Kind";
 
-                case 2:
-                    return "Pair";
+            if (ranks.Contains(1))
+
+                //cuz 1 is highest card
+                return 1.ToString();
+
+            return ranks.Max().ToString();
 
 
-                default:
-
-                    if (ranks.Contains(1))
-
-                        //cuz 1 is highest card
-                        return 1.ToString();
-
-                    return ranks.Max().ToString();
-
-            }
 
 
 
