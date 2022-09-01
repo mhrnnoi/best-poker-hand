@@ -9,8 +9,8 @@ namespace best_poker_hand
             Console.WriteLine("WELCOME ");
 
 
-            var rnks = new int[] { 4, 3, 2, 9, 5 };
-            var suits = new char[] { '♠', '♠', '♠', '♠', '♠' };
+            var rnks = new int[] { 4, 3, 8, 9, 3 };
+            var suits = new char[] { '♠', '♠', '♠', 'a', '♠' };
             Console.WriteLine(BestHand(rnks, suits));
 
         }
@@ -32,8 +32,12 @@ namespace best_poker_hand
 
             for (int i = 0; i < suits.Length - 1; i++)
             {
-                if (ranks[i] == ranks[i + 1])
+                for (int j = i; j < suits.Length - 1; j++)
+                {
+                    if (ranks[i] == ranks[j + 1])
                     sameRank++;
+                }
+
             }
 
             switch (sameRank)
