@@ -9,16 +9,29 @@ namespace best_poker_hand
             Console.WriteLine("WELCOME ");
 
 
-            var rnks = new int[] { 4, 3, 3, 4, 4 };
+            var rnks = new int[] { 3, 3, 4, 4, 4 };
             var suits = new char[] { '♠', '♠', '♠', 'a', '♠' };
             Console.WriteLine(BestHand(rnks, suits));
 
         }
         public static string BestHand(int[] ranks, char[] suits)
         {
-            var sameSuit = 1;
-            var sameRank = 1;
+            if (IsFlush(suits))
+                return "Flush";
 
+            else if (IsThreeOfKind(ranks))
+                return "Three of Kind";
+
+            else if (IsPair(ranks))
+                return "Pair";
+            else 
+                return "high card : " + HighCard(ranks);
+        }
+
+    
+        public static bool IsFlush(char[] suits)
+        {
+            var sameSuit = 1;
             for (int i = 0; i < suits.Length - 1; i++)
             {
                 if (suits[i] == suits[i + 1])
@@ -27,33 +40,62 @@ namespace best_poker_hand
 
 
             if (sameSuit == 5)
-                return "Flush";
+                return true;
+            return false;
+        }
 
 
-            for (int i = 0; i < suits.Length - 1; i++)
+        public static bool IsPair(int[] ranks)
+        {
+
+            var sameRank = 1;
+
+            bool x = false;
+
+            for (int i = 0; i < ranks.Length - 1; i++)
             {
                 sameRank = 1;
-                for (int j = i; j < suits.Length - 1; j++)
+                for (int j = i; j < ranks.Length - 1; j++)
                 {
                     if (ranks[i] == ranks[j + 1])
                         sameRank++;
                 }
-                switch (sameRank)
-                {
-                    case 3:
-                        return "Three of a Kind";
-
-                    case 2:
-                        return "Pair";
-
-
-
-
-                }
+                x = (sameRank == 2) ? true : false;
+                if (x)
+                    return x;
 
             }
+            return x;
+        }
 
 
+
+        public static bool IsThreeOfKind(int[] ranks)
+        {
+            var sameRank = 1;
+
+            bool x = false;
+
+            for (int i = 0; i < ranks.Length - 1; i++)
+            {
+                sameRank = 1;
+                for (int j = i; j < ranks.Length - 1; j++)
+                {
+                    if (ranks[i] == ranks[j + 1])
+                        sameRank++;
+                }
+                x = (sameRank == 3) ? true : false;
+                if (x)
+                    return x;
+
+            }
+            return x;
+        }
+
+
+        public static string HighCard(int[] ranks)
+        {
+            
             if (ranks.Contains(1))
 
                 //cuz 1 is highest card
@@ -61,11 +103,8 @@ namespace best_poker_hand
 
             return ranks.Max().ToString();
 
-
-
-
-
-
         }
+
+
     }
 }
